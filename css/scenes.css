@@ -483,7 +483,7 @@ body.dream-walking #scene-dream {
 }
 #viewer-img {
   max-width: 86vw;
-  max-height: 78vh;
+  max-height: 70vh;
   image-rendering: pixelated;
   box-shadow: 0 0 70px rgba(0, 0, 0, 0.9);
 }

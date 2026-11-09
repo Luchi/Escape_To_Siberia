@@ -242,7 +242,7 @@ Discord. Я написала первой.</pre>`;
       }
       if (item.id === 'coat') {
         if (state.flags.coatOn) {
-          showText('Ватник уже на тебе.');
+          showText('Ватник уже надет. Снять его — слишком холодно.');
           return true;
         }
         setFlag('coatOn');
@@ -253,7 +253,7 @@ Discord. Я написала первой.</pre>`;
       }
       if (item.id === 'hat') {
         if (state.flags.hatOn) {
-          showText('Ушанка уже на голове.');
+          showText('Ушанка уже надета. Снять её — слишком холодно.');
           return true;
         }
         setFlag('hatOn');

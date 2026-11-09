@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PENROSE-77: ПОБЕГ В СИБИРЬ</title>
+  <link rel="icon" href="assets/img/icon_sait.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Handjet:wght@400..700&family=Noto+Sans+JP:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
@@ -13,6 +14,13 @@
 </head>
 <body>
   <div id="crt-overlay"></div>
+
+  <!-- Экран загрузки -->
+  <div id="loader">
+    <img id="loader-icon" src="assets/img/icon_load.png" alt="">
+    <div class="loader-bar"><div id="loader-fill"></div></div>
+    <p class="loader-text">ЗАГРУЗКА СИГНАЛА…</p>
+  </div>
 
   <!-- Аватар: лежит ПОД HUD-панелью, виден через отверстие кольца -->
   <div id="avatar-layer" hidden><img id="avatar" src="assets/img/Vlad-AV.png" alt=""></div>
@@ -59,7 +67,7 @@
       <img class="wall-text" src="assets/img/wall1.png" alt="" style="left:19%; top:5%; transform:rotate(-3deg);">
       <img class="wall-text" src="assets/img/wall5.png" alt="" style="left:44%; top:10%; transform:rotate(1.5deg);">
       <img class="wall-text" src="assets/img/wall2.png" alt="" style="left:31%; top:23%; transform:rotate(-2deg);">
-      <img class="wall-text" src="assets/img/wall3.png" alt="" style="left:78%; top:62%;">
+      <img class="wall-text" src="assets/img/wall3.png" alt="" style="left:82%; top:62%;">
       <img class="wall-text hint" id="wall-hint" hidden src="assets/img/wall4.png" alt="" style="left:70%; top:18%; transform:rotate(2deg);">
     </div>
   </section>
@@ -198,7 +206,7 @@ DUO QUEUE: ОНЛАЙН.</pre>
     <img src="assets/img/Secret_End.png" alt="">
     <div class="ending-caption">
       <h2>СИНХРОНИЗАЦИЯ 25.02</h2>
-      <p>Два сигнала совпали. Вы в одном кадре: ушанки, снег, кот между вами.<br>Обещание выполнено.</p>
+      <p>Два сигнала совпали.<br>Обещание выполнено.</p>
     </div>
     <button id="sync-back">ВЕРНУТЬСЯ</button>
     <button id="sync-restart">С НАЧАЛА</button>
@@ -233,6 +241,7 @@ DUO QUEUE: ОНЛАЙН.</pre>
   <script src="js/scenes.js"></script>
   <script src="js/inventory.js"></script>
   <script src="js/notes.js"></script>
+  <script src="js/preload.js"></script>
   <script src="js/scene0-boot.js"></script>
   <script src="js/scene1-commissariat.js"></script>
   <script src="js/scene2-station.js"></script>

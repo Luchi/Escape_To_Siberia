@@ -21,7 +21,9 @@
       : Promise.resolve();
     // не ждём вечно, если шрифт не загрузился
     const timeout = new Promise(resolve => setTimeout(resolve, 1500));
-    return Promise.race([ready, timeout]);
+    const fonts = Promise.race([ready, timeout]);
+    const assets = window.assetsReady || Promise.resolve();
+    return Promise.all([fonts, assets]);
   }
 
   sceneModules['scene-boot'] = {

@@ -82,7 +82,7 @@ function isWorn(item) {
 
 // Слоты выбираются только цифрами 1–6. Мышь в инвентаре не работает.
 function clickSlot(i) {
-  state.selectedSlot = i + 1;
+  state.selectedSlot = state.selectedSlot === i + 1 ? 0 : i + 1;
   saveState();
   renderInventory();
 }
@@ -126,6 +126,10 @@ function useSelected() {
   const item = state.inventory[state.selectedSlot - 1];
   if (!item) { showText('Слот пуст. Выбери предмет цифрами 1–6.'); return; }
   useItem(item);
+  // после использования фокус с предмета снимается
+  state.selectedSlot = 0;
+  saveState();
+  renderInventory();
 }
 
 function examineSelected() {
@@ -178,12 +182,7 @@ function isTyping(e) {
 }
 
 function ensureSelection() {
-  const item = state.inventory[state.selectedSlot - 1];
-  if (!item && state.inventory.length) {
-    state.selectedSlot = 1;
-    saveState();
-    renderInventory();
-  }
+  // ничего не выбираем автоматически: после использования фокус снят
 }
 
 document.addEventListener('keydown', e => {
@@ -192,9 +191,7 @@ document.addEventListener('keydown', e => {
   // цифры работают в любой раскладке (e.code не зависит от языка)
   const digit = /^Digit([1-6])$/.exec(e.code || '');
   if (digit) {
-    state.selectedSlot = Number(digit[1]);
-    renderInventory();
-    saveState();
+    clickSlot(Number(digit[1]) - 1);
     return;
   }
 
