@@ -14,7 +14,7 @@
     // сон
     'luchi_model.png','eye_dream.png','manga.png','paws_t.png',
     // концовки
-    'ending-taiga.png','Ending_Arm.png','defeat.png','Secret_End.png','Luchi_End.png',
+    'ending-taiga.png','Ending_Arm.png','defeat.png','Secret_End.png','Luchi_End.png','End_Scene1.png',
     'end_light.gif',
     // загрузка
     'icon_load.png','icon_sait.png'
@@ -62,7 +62,7 @@
         else complete();
       };
       img.onerror = complete;
-      img.src = 'assets/img/' + name;
+      img.src = 'assets/img/' + name + (name === 'radio.png' ? '?v=2' : '');
     });
 
     setTimeout(() => { done(); resolve(); }, 20000);

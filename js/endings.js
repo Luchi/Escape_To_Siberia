@@ -68,6 +68,15 @@ function showEnding(id) {
     return;
   }
 
+  // провал в сцене 1 — своя концовка с фоном
+  if (id === 'penrose') {
+    const screen = document.getElementById('penrose-screen');
+    if (screen) screen.hidden = false;
+    state.endingsSeen.push(id);
+    saveState();
+    return;
+  }
+
   // «Поглотили мысли о Лучи»
   if (id === 'consumed') {
     const screen = document.getElementById('consumed-screen');
@@ -150,6 +159,15 @@ if (taigaFull) {
   taigaFull.addEventListener('click', () => {
     document.getElementById('taiga-screen').hidden = true;
     fullRestart();
+  });
+}
+
+// кнопка «С НАЧАЛА» на экране провала сцены 1
+const penroseRestart = document.getElementById('penrose-restart');
+if (penroseRestart) {
+  penroseRestart.addEventListener('click', () => {
+    document.getElementById('penrose-screen').hidden = true;
+    restartScene1();
   });
 }
 

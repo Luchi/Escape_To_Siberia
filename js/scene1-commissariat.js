@@ -8,7 +8,7 @@
   function radioView() {
     const powered = state.flags.batteryInstalled;
     openModal(`
-      <img class="radio-scene" src="assets/img/radio.png" alt="" onerror="this.remove()">
+      <img class="radio-scene" src="assets/img/radio.png?v=2" alt="" onerror="this.remove()">
       <h3>РАДИО</h3>
       <p>На радио выцарапано: «Используй частоту оператора».</p>
       ${powered
@@ -42,7 +42,7 @@
     let repeat = null;
 
     openModal(`
-      <img class="radio-scene" src="assets/img/radio.png" alt="" onerror="this.remove()">
+      <img class="radio-scene" src="assets/img/radio.png?v=2" alt="" onerror="this.remove()">
       <h3>РАДИО</h3>
       <div class="radio-row">
         <button id="freq-aa" title="Намного ниже">◀◀</button>

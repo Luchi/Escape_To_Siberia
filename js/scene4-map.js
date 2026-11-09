@@ -3,6 +3,8 @@
 
   sceneModules['scene-map'] = {
     onEnter() {
+      const mapBox = document.querySelector('#scene-map .map-container');
+      if (mapBox) mapBox.style.visibility = '';
       refreshPoints();
       hideChoice();
       hideTaigaScene();
@@ -156,10 +158,11 @@
     }
     forestStage += 1;
     if (forestStage >= 3) {
-      hideChoice();
       state.flags.mapStep = 3;
       saveState();
       openTaigaScene();
+      hideChoice();
+      if (window.ambientWind) window.ambientWind(true);
       return;
     }
     renderForest();
@@ -167,6 +170,8 @@
 
   // ── тайга: только фон и радио ────────────────
   function openTaigaScene() {
+    const mapBox = document.querySelector('#scene-map .map-container');
+    if (mapBox) mapBox.style.visibility = 'hidden';
     const layer = document.getElementById('taiga-scene');
     if (layer) layer.hidden = false;
     if (window.ambientWind) window.ambientWind(true);

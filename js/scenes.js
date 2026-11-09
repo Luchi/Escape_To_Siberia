@@ -16,7 +16,7 @@ function showScene(id) {
   saveState();
 
   // Показать HUD везде, кроме boot
-  const hideHud = (id === 'scene-boot' || id === 'scene-final');
+  const hideHud = (id === 'scene-boot' || id === 'scene-final' || id === 'scene-dream');
   document.getElementById('hud').hidden = hideHud;
   const avatarLayer = document.getElementById('avatar-layer');
   if (avatarLayer) avatarLayer.hidden = hideHud;
