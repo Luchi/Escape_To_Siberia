@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>PENROSE-77 — выбор шрифта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Handjet:wght@400;600&family=Tiny5&family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#050a05; --ui:#0a1a0a; --border:#2a5a2a; --text:#b8e6b8; --luchi:#a8d820; --amber:#ffb000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); padding:32px; font-family:monospace; }
+  h1 { font-family:'Press Start 2P'; font-size:18px; color:var(--luchi); margin-bottom:8px; line-height:1.6; }
+  .sub { color:#7c8b6a; margin-bottom:28px; font-size:15px; }
+  .card { border:1px solid var(--border); background:var(--ui); padding:18px 22px; margin-bottom:18px; }
+  .card h2 { font-size:16px; color:var(--amber); font-family:monospace; margin-bottom:6px; }
+  .card .meta { font-size:13px; color:#7c8b6a; margin-bottom:12px; }
+  .sample { font-size:21px; line-height:1.6; margin:6px 0; }
+  .sample.big { font-size:26px; }
+  .dim { color:#7c8b6a; }
+  .hud { display:flex; gap:8px; align-items:center; font-size:14px; margin-top:12px; }
+  .slot { width:56px; height:56px; border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .slot b { font-size:20px; font-weight:normal; }
+  .slot span { font-size:10px; opacity:.8; }
+
+  .dotgothic { font-family:'DotGothic16', monospace; }
+  .handjet { font-family:'Handjet', monospace; font-weight:500; }
+  .tiny5 { font-family:'Tiny5', monospace; }
+  .press { font-family:'Press Start 2P', monospace; font-size:15px; line-height:1.9; }
+  .pixelify { font-family:'Pixelify Sans', monospace; }
+</style>
+</head>
+<body>
+  <h1>PENROSE-77 · выбор шрифта</h1>
+  <p class="sub">Открой файл в браузере и скажи номер. Сейчас в игре стоит №2 (Handjet).</p>
+
+  <div class="card dotgothic">
+    <h2>1. DotGothic16</h2>
+    <div class="meta">точечная матрица · кириллица + японский · без жирного</div>
+    <div class="sample big">PENROSE-77 // СИБИРСКИЙ РЕЛЕЙНЫЙ УЗЕЛ</div>
+    <div class="sample">Влад «Юзиро». Дата: 14.02. Штамп: HÄHER. Приписка: «Не задерживайся».</div>
+    <div class="sample dim">143. I love you · 「約束を忘れないで」 · ПОМЕХИ: 87%</div>
+    <div class="hud"><div class="slot"><b>🔋</b><span>Батарейка</span></div><div class="slot"><b>🧥</b><span>Ватник</span></div><div class="slot"><b>Q</b><span>Рывок</span></div><div class="slot"><b>W</b><span>Использовать</span></div></div>
+  </div>
+
+  <div class="card handjet">
+    <h2>2. Handjet — сейчас в игре</h2>
+    <div class="meta">LED/табло · кириллица есть · крупнее и рельефнее</div>
+    <div class="sample big">PENROSE-77 // СИБИРСКИЙ РЕЛЕЙНЫЙ УЗЕЛ</div>
+    <div class="sample">Влад «Юзиро». Дата: 14.02. Штамп: HÄHER. Приписка: «Не задерживайся».</div>
+    <div class="sample dim">143. I love you · 「約束を忘れないで」 · ПОМЕХИ: 87%</div>
+    <div class="hud"><div class="slot"><b>🔋</b><span>Батарейка</span></div><div class="slot"><b>🧥</b><span>Ватник</span></div><div class="slot"><b>Q</b><span>Рывок</span></div><div class="slot"><b>W</b><span>Использовать</span></div></div>
+  </div>
+
+  <div class="card tiny5">
+    <h2>3. Tiny5</h2>
+    <div class="meta">крошечный пиксель · кириллица есть · мельче, «ретро-игровой»</div>
+    <div class="sample big">PENROSE-77 // СИБИРСКИЙ РЕЛЕЙНЫЙ УЗЕЛ</div>
+    <div class="sample">Влад «Юзиро». Дата: 14.02. Штамп: HÄHER. Приписка: «Не задерживайся».</div>
+    <div class="sample dim">143. I love you · 「約束を忘れないで」 · ПОМЕХИ: 87%</div>
+    <div class="hud"><div class="slot"><b>🔋</b><span>Батарейка</span></div><div class="slot"><b>🧥</b><span>Ватник</span></div><div class="slot"><b>Q</b><span>Рывок</span></div><div class="slot"><b>W</b><span>Использовать</span></div></div>
+  </div>
+
+  <div class="card press">
+    <h2 style="font-family:'Press Start 2P'; font-size:12px;">4. Press Start 2P</h2>
+    <div class="meta" style="font-family:monospace; font-size:13px;">аркадный 8-бит · кириллица есть · очень широкий, только для заголовков</div>
+    <div class="sample">PENROSE-77 // СИБИРСКИЙ РЕЛЕЙНЫЙ УЗЕЛ</div>
+    <div class="sample dim">143. I love you</div>
+  </div>
+
+  <div class="card pixelify">
+    <h2>5. Pixelify Sans — было раньше</h2>
+    <div class="meta">мягкий пиксель · кириллица есть</div>
+    <div class="sample big">PENROSE-77 // СИБИРСКИЙ РЕЛЕЙНЫЙ УЗЕЛ</div>
+    <div class="sample">Влад «Юзиро». Дата: 14.02. Штамп: HÄHER. Приписка: «Не задерживайся».</div>
+    <div class="sample dim">143. I love you · 「約束を忘れないで」 · ПОМЕХИ: 87%</div>
+  </div>
+</body>
+</html>

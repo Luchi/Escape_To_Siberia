@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PENROSE-77: ПОБЕГ В СИБИРЬ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Handjet:wght@400..700&family=Noto+Sans+JP:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/scenes.css">
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/effects.css">
+</head>
+<body>
+  <div id="crt-overlay"></div>
+
+  <!-- Аватар: лежит ПОД HUD-панелью, виден через отверстие кольца -->
+  <div id="avatar-layer" hidden><img id="avatar" src="assets/img/Vlad-AV.png" alt=""></div>
+
+  <!-- Постоянный UI -->
+  <div id="hud" hidden>
+    <button id="sound-btn" title="Звук">♪</button>
+    <button id="restart-btn" title="Начать сначала">↺</button>
+    <button id="notes-btn" title="Память"><img class="hud-icon" src="assets/img/Note.png" alt="Память"></button>
+    <div id="inventory"></div>
+    <div id="skills">
+      <button data-skill="Q" data-label="Рывок" title="Рывок"><img class="hud-icon" src="assets/img/Q.png" alt="Q"></button>
+      <button data-skill="W" data-label="Применить" title="Использовать предмет"><img class="hud-icon" src="assets/img/W.png" alt="W"></button>
+      <button data-skill="E" data-label="Осмотр" title="Осмотреть предмет"><img class="hud-icon" src="assets/img/E.png" alt="E"></button>
+      <button data-skill="R" data-label="Побег" title="ПОБЕГ — используется всего один раз в жизни"><img class="hud-icon" src="assets/img/icon_R.png" alt="R"></button>
+    </div>
+  </div>
+
+  <!-- Сцена 0 -->
+  <section class="scene active" id="scene-boot">
+    <div class="crt-window">
+      <pre id="boot-text"></pre>
+      <div id="boot-input-wrap" hidden>
+        <label>ПОЗЫВНОЙ ОБЪЕКТА:</label>
+        <input id="callsign" maxlength="20" autocomplete="off" />
+        <button id="start-btn" hidden>НАЧАТЬ ПЕРЕДАЧУ</button>
+      </div>
+      <p id="boot-easter" class="hidden">Обещание уже принято. Лучи ждёт в Сибири.</p>
+    </div>
+  </section>
+
+  <!-- Сцена 1 -->
+  <section class="scene" id="scene-commissariat">
+    <div class="room">
+      <div class="hotspot" data-id="calendar" title="Календарь" style="left:3%; top:12%; width:11%; height:33%;"></div>
+      <div class="hotspot" data-id="photo"    title="Фотография" style="left:14.5%; top:30%; width:5%; height:20%;"></div>
+      <div class="hotspot" data-id="mirror"   title="Зеркало" style="left:20%; top:17%; width:11%; height:43%;"></div>
+      <div class="hotspot" data-id="radio"    title="Радио" style="left:30.5%; top:52%; width:9%; height:12%;"></div>
+      <div class="hotspot" data-id="notice"   title="Повестка" style="left:10%; top:57%; width:14%; height:15%;"></div>
+      <div class="hotspot" data-id="door"     title="Дверь" style="left:40%; top:24%; width:16%; height:56%;"></div>
+      <div class="hotspot" data-id="safe"     title="Сейф" style="left:61%; top:24%; width:9.5%; height:49%;"></div>
+      <div class="hotspot" data-id="window"   title="Окно" style="left:86%; top:7%; width:14%; height:50%;"></div>
+
+      <img class="wall-text" src="assets/img/wall1.png" alt="" style="left:19%; top:5%; transform:rotate(-3deg);">
+      <img class="wall-text" src="assets/img/wall5.png" alt="" style="left:44%; top:10%; transform:rotate(1.5deg);">
+      <img class="wall-text" src="assets/img/wall2.png" alt="" style="left:31%; top:23%; transform:rotate(-2deg);">
+      <img class="wall-text" src="assets/img/wall3.png" alt="" style="left:78%; top:62%;">
+      <img class="wall-text hint" id="wall-hint" hidden src="assets/img/wall4.png" alt="" style="left:70%; top:18%; transform:rotate(2deg);">
+    </div>
+  </section>
+
+  <!-- Сцена 2 -->
+  <section class="scene" id="scene-station">
+    <div class="station-room">
+      <div class="hotspot" id="terminal" title="Терминал" style="left:30%; top:42%; width:9%; height:22%;"></div>
+    </div>
+    <button id="sleep-btn" class="big-btn" hidden>ЛЕЧЬ СПАТЬ</button>
+  </section>
+
+  <!-- Сцена 3 -->
+  <section class="scene" id="scene-dream">
+    <div id="dream-layer"></div>
+    <div id="dream-luchi" aria-hidden="true">
+      <div class="luchi-glow"></div>
+      <img id="dream-model" src="assets/img/luchi_model.png" alt="">
+    </div>
+    <div class="dream-eye"><img id="dream-eye-img" src="assets/img/eye_dream.png" alt=""></div>
+    <div class="dream-anchors">
+      <div class="anchor" data-id="cat" title="Ева-Фунтик — кот, который светит" style="left:20%; top:65%;"><img src="assets/img/icon-catlight.png" alt=""></div>
+      <div class="anchor" data-id="dino" title="Дейнозух — смелость и детство" style="left:80%; top:65%;"><img src="assets/img/icon-dino.png" alt=""></div>
+      <div class="anchor" data-id="draw" title="Рисование — его собственный голос" style="left:35%; top:56%;"><img src="assets/img/manga.png" alt=""></div>
+    </div>
+    <div class="s-hint"><b>S</b><span>идти вперёд</span></div>
+    <div class="dream-walk">
+      <button id="walk-btn" class="hold-btn">ЗАЖМИ S — ИДИ ВПЕРЁД</button>
+      <div class="walk-track"><div class="walk-fill" id="walk-fill"></div></div>
+      <p class="walk-hint">Держи S или кнопку. Пока якоря не собраны, она уходит вперёд.</p>
+    </div>
+    <div id="hug-scene" hidden>
+      <div class="hug-silhouettes">
+        <img src="assets/img/luchi_model.png" alt="">
+      </div>
+      <p>Я рядом.</p>
+      <button id="wake-btn">ПРОСНУТЬСЯ</button>
+    </div>
+  </section>
+
+  <!-- Сцена 4 -->
+  <section class="scene" id="scene-map">
+    <div class="map-fog"></div>
+    <div class="map-container">
+      <button class="map-point" data-point="platform" style="top:80%; left:20%;">Повестка-Экспресс</button>
+      <button class="map-point" data-point="road"     style="top:55%; left:40%;">Трасса</button>
+      <button class="map-point" data-point="forest"   style="top:40%; left:55%;">Лес</button>
+      <button class="map-point" data-point="taiga"    style="top:20%; left:75%;">Тайга</button>
+    </div>
+  </section>
+
+  <!-- Финал -->
+  <section class="scene" id="scene-final">
+    <div class="final-room">
+      <pre class="final-text">
+PENROSE-77 // СИГНАЛ СТАБИЛЕН
+ОБЪЕКТ ДОБРАЛСЯ.
+ОПЕРАТОР НА МЕСТЕ.
+ШАУРМА ГОТОВА.
+DUO QUEUE: ОНЛАЙН.</pre>
+      <div class="wall-inscription">
+        「<span id="secret-word">約束</span>を忘れないで」
+      </div>
+      <button id="final-restart" onclick="restartFromFinal()">С НАЧАЛА</button>
+    </div>
+  </section>
+
+  <!-- Модал (диалоги, терминал, код, радио) -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-window">
+      <div id="modal-content"></div>
+      <button id="modal-close">ЗАКРЫТЬ</button>
+    </div>
+  </div>
+
+  <!-- Панель Память -->
+  <div class="modal" id="notes-modal" hidden>
+    <div class="modal-window">
+      <h3>ПАМЯТЬ</h3>
+      <ul id="notes-list"></ul>
+      <button id="notes-close">ЗАКРЫТЬ</button>
+    </div>
+  </div>
+
+  <!-- Концовки -->
+  <div class="modal" id="ending-modal" hidden>
+    <div class="modal-window ending-window">
+      <h2 id="ending-title"></h2>
+      <div id="ending-content"></div>
+      <div id="ending-actions"></div>
+    </div>
+  </div>
+
+  <!-- Концовка «Армия» -->
+  <div id="army-screen" hidden>
+    <div class="army-stage">
+      <img id="army-defeat" src="assets/img/defeat.png" alt="DEFEAT">
+      <button id="army-restart">ПЕРЕИГРАТЬ</button>
+    </div>
+  </div>
+
+  <!-- Карточка предмета: взять с собой -->
+  <div id="pickup" hidden>
+    <div class="pickup-card">
+      <img id="pickup-img" alt="">
+      <h3 id="pickup-name"></h3>
+      <p id="pickup-desc"></p>
+      <button id="pickup-take">ВЗЯТЬ С СОБОЙ</button>
+    </div>
+  </div>
+
+  <!-- Выбор поверх фона -->
+  <div id="choice" hidden>
+    <img id="forest-paws" src="assets/img/paws_t.png" alt="" hidden>
+    <div class="choice-box">
+      <p class="choice-text" id="choice-text"></p>
+      <div class="choice-buttons" id="choice-buttons"></div>
+    </div>
+  </div>
+
+  <!-- Тайга: только радио -->
+  <div id="taiga-scene" hidden>
+    <div class="taiga-radio" id="taiga-radio" title="Радио"></div>
+  </div>
+
+  <!-- Концовка «Тайга» -->
+  <div id="taiga-screen" hidden>
+    <img id="taiga-bg" src="assets/img/ending-taiga.png" alt="">
+    <p class="taiga-caption">Ты свернул не туда. Тайга не отпускает.</p>
+    <button id="taiga-restart">ПЕРЕИГРАТЬ</button>
+    <button id="taiga-full">С НАЧАЛА</button>
+  </div>
+
+  <!-- Концовка «Синхронизация» -->
+  <div id="sync-screen" hidden>
+    <img src="assets/img/Secret_End.png" alt="">
+    <div class="ending-caption">
+      <h2>СИНХРОНИЗАЦИЯ 25.02</h2>
+      <p>Два сигнала совпали. Вы в одном кадре: ушанки, снег, кот между вами.<br>Обещание выполнено.</p>
+    </div>
+    <button id="sync-back">ВЕРНУТЬСЯ</button>
+    <button id="sync-restart">С НАЧАЛА</button>
+  </div>
+
+  <!-- Концовка «Поглотили мысли о Лучи» -->
+  <div id="consumed-screen" hidden>
+    <img src="assets/img/Luchi_End.png" alt="">
+    <div class="ending-caption">
+      <h2>ПОГЛОТИЛИ МЫСЛИ О ЛУЧИ</h2>
+      <p>Твой силуэт растворяется в буквах.</p>
+    </div>
+    <button id="consumed-restart">ПЕРЕИГРАТЬ</button>
+  </div>
+
+  <!-- Просмотр картинки (зеркало, фотография) -->
+  <div id="viewer" hidden>
+    <div class="viewer-box">
+      <img id="viewer-img" alt="">
+      <p id="viewer-caption"></p>
+    </div>
+    <button id="viewer-close">ЗАКРЫТЬ</button>
+  </div>
+
+  <!-- Вспышка перед финалом -->
+  <div id="flash"></div>
+  <div id="end-light-wrap" hidden><img id="end-light" src="assets/img/end_light.gif" alt=""></div>
+  <div id="dream-flash"></div>
+
+  <!-- Скрипты -->
+  <script src="js/state.js"></script>
+  <script src="js/scenes.js"></script>
+  <script src="js/inventory.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/scene0-boot.js"></script>
+  <script src="js/scene1-commissariat.js"></script>
+  <script src="js/scene2-station.js"></script>
+  <script src="js/scene3-dream.js"></script>
+  <script src="js/scene4-map.js"></script>
+  <script src="js/endings.js"></script>
+  <script src="js/final.js"></script>
+  <script src="js/audio.js"></script>
+</body>
+</html>

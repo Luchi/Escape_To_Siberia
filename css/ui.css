@@ -1,0 +1,280 @@
+#hud {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(940px, 94vw);
+  aspect-ratio: 691 / 131;
+  height: auto;
+  padding: 0;
+  background: url('../assets/img/hud.png') center / 100% 100% no-repeat;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 -2px 10px rgba(0, 0, 0, 0.55));
+  z-index: 100;
+}
+#hud[hidden] { display: none; }
+
+#avatar-layer[hidden] { display: none; }
+#avatar-layer {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(940px, 94vw);
+  aspect-ratio: 691 / 131;
+  z-index: 99;
+  pointer-events: none;
+}
+#avatar {
+  position: absolute;
+  left: 0.6%;
+  top: 22.5%;
+  width: 12%;
+  height: 63.4%;
+  border-radius: 50%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+#notes-btn,
+#sound-btn,
+#restart-btn {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  line-height: 1;
+  font-size: clamp(11px, 1.25vw, 19px);
+  overflow: hidden;
+}
+.hud-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+#notes-btn { left: 22.87%; top: 21.4%; width: 6.65%; height: 38.2%; color: var(--text); font-size: clamp(7px, 0.7vw, 11px); letter-spacing: 0; }
+#sound-btn { left: 0.9%; top: 72%; width: 4.2%; height: 21%; color: var(--text); opacity: 0.85; font-size: clamp(12px, 1.1vw, 17px); }
+#restart-btn { left: 8.2%; top: 72%; width: 4.2%; height: 21%; color: var(--red); font-size: clamp(12px, 1.1vw, 17px); }
+#sound-btn.off {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+#inventory {
+  position: absolute;
+  left: 75.4%;
+  top: 14.5%;
+  width: 15.9%;
+  height: 57.3%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1px;
+}
+.slot {
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(120, 150, 110, 0.16);
+  background: rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.15s, background 0.15s;
+}
+.slot:hover {
+  background: rgba(168, 216, 32, 0.08);
+}
+.slot.selected {
+  box-shadow: inset 0 0 0 1px var(--luchi), 0 0 10px rgba(168, 216, 32, 0.35);
+}
+.slot.worn {
+  box-shadow: inset 0 0 0 1px rgba(168, 216, 32, 0.7);
+}
+.slot.worn .name {
+  color: var(--luchi);
+}
+.slot .key {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 10px;
+  color: var(--text);
+  opacity: 0.6;
+}
+.slot .ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: clamp(11px, 1.1vw, 18px);
+  line-height: 1;
+}
+.ico-img {
+  max-width: 86%;
+  max-height: 86%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.ico-emoji {
+  font-style: normal;
+  display: inline;
+}
+.ico-img + .ico-emoji {
+  display: none;
+}
+.slot .name {
+  display: none;
+}
+.slot.worn::after {
+  content: '✓';
+  position: absolute;
+  top: 1px;
+  right: 4px;
+  font-size: 11px;
+  color: var(--luchi);
+}
+
+.item-tip {
+  position: fixed;
+  z-index: 9001;
+  pointer-events: none;
+  background: rgba(5, 10, 5, 0.97);
+  border: 1px solid var(--ui-border);
+  padding: 8px 10px;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 0 18px rgba(168, 216, 32, 0.15);
+}
+.item-tip[hidden] { display: none; }
+.item-tip b { color: var(--luchi); font-weight: normal; }
+.item-tip span { color: var(--text); font-size: 16px; }
+.item-tip i { color: #7c8b6a; font-size: 12px; font-style: normal; }
+
+#skills {
+  position: absolute;
+  left: 29.52%;
+  top: 21.4%;
+  width: 30.1%;
+  height: 38.2%;
+  display: flex;
+  gap: 0;
+}
+#skills button {
+  position: relative;
+  flex: 1;
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(120, 150, 110, 0.16);
+  background: transparent;
+  color: #4f8a4f;
+  font-size: clamp(12px, 1.25vw, 19px);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+}
+#skills button:hover {
+  color: #9fe09f;
+  background: rgba(168, 216, 32, 0.06);
+}
+#skills button::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  font-size: clamp(5px, 0.5vw, 8px);
+  font-family: var(--font-ui);
+  color: var(--text);
+  opacity: 0.65;
+  white-space: nowrap;
+  pointer-events: none;
+  display: none;
+}
+
+#notes-list {
+  list-style: none;
+  margin-top: 12px;
+}
+#notes-list li {
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--ui-border);
+}
+
+.ending-window {
+  text-align: center;
+}
+#ending-title {
+  color: var(--amber);
+  margin-bottom: 16px;
+  font-family: var(--font-head);
+  font-size: 20px;
+}
+#ending-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#restart-btn:hover { text-shadow: 0 0 8px var(--red); }
+#notes-btn:hover, #sound-btn:hover { text-shadow: 0 0 8px rgba(168, 216, 32, 0.7); }
+
+/* Концовка «Армия» */
+#army-screen {
+  position: fixed;
+  inset: 0;
+  background: #000 url('../assets/img/Ending_Arm.png') center / cover no-repeat;
+  z-index: 600;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 5vh;
+}
+#army-screen[hidden] { display: none; }
+#army-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+.army-stage {
+  position: relative;
+  width: min(520px, 58vw);
+  z-index: 1;
+}
+#army-defeat {
+  display: block;
+  width: 100%;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 28px rgba(255, 40, 40, 0.35));
+}
+#army-boy { display: none; }
+#army-restart {
+  position: absolute;
+  left: 50%;
+  top: calc(94% + 3px);
+  transform: translate(-50%, -50%);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: #f3d27a;
+  font-family: var(--font-head);
+  font-size: clamp(7px, 0.72vw, 10px);
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(255, 60, 40, 0.7);
+}
+#army-restart:hover {
+  color: #fff;
+  box-shadow: 0 0 26px rgba(255, 80, 60, 0.55);
+}

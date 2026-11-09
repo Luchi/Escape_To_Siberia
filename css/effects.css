@@ -1,0 +1,17 @@
+.glitch {
+  animation: glitch 0.4s linear;
+}
+@keyframes glitch {
+  0%   { transform: translate(0); text-shadow: none; }
+  20%  { transform: translate(-3px, 1px); text-shadow: 2px 0 var(--red), -2px 0 var(--luchi); }
+  40%  { transform: translate(3px, -1px); text-shadow: -2px 0 var(--red), 2px 0 var(--luchi); }
+  60%  { transform: translate(-2px, 2px); text-shadow: 2px 0 var(--red), -2px 0 var(--luchi); }
+  100% { transform: translate(0); text-shadow: none; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+.shake { animation: shake 0.3s; }

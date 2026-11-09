@@ -1,0 +1,115 @@
+:root {
+  --bg: #050a05;
+  --green: #6ee66e;
+  --amber: #ffb000;
+  --red: #ff2a2a;
+  --luchi: #a8d820;
+  --luchi-2: #f5e642;
+  --ui-bg: #0a1a0a;
+  --ui-border: #2a5a2a;
+  --text: #b8e6b8;
+  --hud-h: 90px;
+  --font-ui: 'Handjet', 'DotGothic16', monospace;
+  --font-head: 'Press Start 2P', 'DotGothic16', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 23px;
+  font-weight: 500;
+  overflow: hidden;
+  cursor: default;
+  /* пиксельный вид: без сглаживания и синтеза */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+pre, code, #boot-text, .final-text, .modal-window pre {
+  font-family: var(--font-ui);
+}
+
+img, canvas {
+  image-rendering: pixelated;
+}
+
+#crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0px,
+    rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0) 4px
+  );
+  animation: crt-flicker 6s infinite;
+}
+
+@keyframes crt-flicker {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.85; }
+}
+
+.scene {
+  display: none;
+  position: absolute;
+  inset: 0;
+  padding: 40px;
+}
+.scene.active { display: block; }
+
+.hidden { display: none !important; }
+
+input, button {
+  font-family: inherit;
+  font-size: inherit;
+  background: var(--ui-bg);
+  color: var(--green);
+  border: 1px solid var(--ui-border);
+  padding: 6px 12px;
+  cursor: pointer;
+}
+input { cursor: text; }
+button:hover { border-color: var(--green); color: #fff; }
+
+.big-btn {
+  font-size: 24px;
+  padding: 12px 28px;
+  margin-top: 24px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+}
+.modal[hidden] { display: none; }
+
+.modal-window {
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  padding: 24px;
+  min-width: 420px;
+  max-width: 720px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+#modal-close { margin-top: 14px; }
+.modal-window pre {
+  white-space: pre-wrap;
+  color: var(--text);
+  font-family: var(--font-ui);
+}
