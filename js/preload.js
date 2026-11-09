@@ -1,7 +1,7 @@
-// Загрузка: все картинки первой сцены — до старта,
-// остальное догружается, пока игрок проходит сцену 1.
+// Загрузка: всё для сцен 0–1 — до старта.
+// Остальное грузится фоном по порядку: сцена 2 → сон → карта → платформа →
+// трасса → лес → тайга → концовки → финал.
 (function () {
-  // всё, что нужно для сцены 0 и сцены 1 — грузим до старта
   const CRITICAL = [
     'icon_load.png','hud.png','Vlad-AV.png',
     'bg-commissariat.png','bg-commissariat-wthoutPhoto.png',
@@ -12,14 +12,26 @@
     'icon-battery.png','icon-coat.png','hat.png','shawarma.png','icon-dino.png'
   ];
 
-  // остальное догружается, пока игрок в первой сцене
-  const REST = [
-    'bg-station.png','bg-train.png','bg-map.png','bg-platform.png','bg-road.png',
-    'bg-forest.png','bg-taiga.png','bg-final.png',
-    'radio_for.png',
-    'icon-catlight.png','luchi_model.png','eye_dream.png','manga.png','paws_t.png',
-    'ending-taiga.png','Ending_Arm.png','defeat.png','Secret_End.png','Luchi_End.png',
-    'End_Scene1.png','end_light.gif','favicon.png','icon_sait.png'
+  const REST_GROUPS = [
+    // сцена 2
+    ['bg-station.png'],
+    // сон
+    ['bg-train.png','luchi_model.png','eye_dream.png','manga.png','paws_t.png','icon-catlight.png'],
+    // карта
+    ['bg-map.png'],
+    // платформа
+    ['bg-platform.png'],
+    // трасса
+    ['bg-road.png'],
+    // лес
+    ['bg-forest.png'],
+    // тайга
+    ['bg-taiga.png','radio_for.png'],
+    // концовки
+    ['ending-taiga.png','Ending_Arm.png','defeat.png','Secret_End.png',
+     'Luchi_End.png','End_Scene1.png','end_light.gif'],
+    // финал и мелочи
+    ['bg-final.png','favicon.png','icon_sait.png']
   ];
 
   const fill = document.getElementById('loader-fill');
@@ -65,6 +77,15 @@
     });
   }
 
+  async function loadRest() {
+    for (const group of REST_GROUPS) {
+      await Promise.race([
+        loadList(group, null, false),
+        new Promise(resolve => setTimeout(resolve, 15000))
+      ]);
+    }
+  }
+
   window.assetsReady = new Promise(resolve => {
     let resolved = false;
     const finish = () => {
@@ -72,8 +93,8 @@
       resolved = true;
       doneUI();
       resolve();
-      // остальное — уже после старта, не блокирует игру
-      setTimeout(() => loadList(REST, null, false), 300);
+      // всё остальное — уже во время сцен 0–1
+      setTimeout(loadRest, 200);
     };
 
     loadList(CRITICAL, ratio => {

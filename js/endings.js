@@ -157,8 +157,8 @@ if (taigaRestart) {
 const taigaFull = document.getElementById('taiga-full');
 if (taigaFull) {
   taigaFull.addEventListener('click', () => {
+    if (!fullRestart()) return;
     document.getElementById('taiga-screen').hidden = true;
-    fullRestart();
   });
 }
 
@@ -182,8 +182,8 @@ if (syncBack) {
 const syncRestart = document.getElementById('sync-restart');
 if (syncRestart) {
   syncRestart.addEventListener('click', () => {
+    if (!fullRestart()) return;
     document.getElementById('sync-screen').hidden = true;
-    fullRestart();
   });
 }
 

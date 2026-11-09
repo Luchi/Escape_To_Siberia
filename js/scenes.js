@@ -152,10 +152,11 @@ window.addEventListener('resize', syncHudHeight);
 
 // ── Рестарт ─────────────────────────────────
 function fullRestart() {
-  if (!confirm('Начать с самого начала?\nВесь прогресс, инвентарь и найденные записи будут сброшены.')) return;
+  if (!confirm('Начать с самого начала?\nВесь прогресс, инвентарь и найденные записи будут сброшены.')) return false;
   resetState();
   localStorage.removeItem(STORAGE_KEY);
   location.reload();
+  return true;
 }
 
 document.getElementById('restart-btn').addEventListener('click', fullRestart);
