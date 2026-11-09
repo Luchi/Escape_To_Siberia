@@ -16,14 +16,33 @@
   let bootToken = 0;
 
   function fontsReady() {
-    const ready = (document.fonts && document.fonts.ready)
-      ? document.fonts.ready
-      : Promise.resolve();
-    // не ждём вечно, если шрифт не загрузился
-    const timeout = new Promise(resolve => setTimeout(resolve, 1500));
-    const fonts = Promise.race([ready, timeout]);
+    const timeout = new Promise(resolve => setTimeout(resolve, 15000));
+
+    if (!document.fonts || !document.fonts.load) {
+      return Promise.race([timeout, (window.assetsReady || Promise.resolve()).then(() => {})]);
+    }
+
+    // явно просим все шрифты, которые используются в игре
+    const faces = [
+      '400 20px "Handjet"',
+      '700 20px "Handjet"',
+      '400 20px "Press Start 2P"',
+      '400 20px "DotGothic16"',
+      '400 20px "Noto Sans JP"',
+      '500 20px "Noto Sans JP"'
+    ];
+
+    const loads = faces.map(f =>
+      document.fonts.load(f).catch(() => {})
+    );
+
+    const all = Promise.all(loads).then(() => document.fonts.ready);
     const assets = window.assetsReady || Promise.resolve();
-    return Promise.all([fonts, assets]);
+
+    return Promise.race([
+      Promise.all([all, assets]).then(() => {}),
+      timeout
+    ]);
   }
 
   sceneModules['scene-boot'] = {
