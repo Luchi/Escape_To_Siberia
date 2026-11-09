@@ -1,7 +1,6 @@
 (function () {
   document.getElementById('secret-word').addEventListener('click', () => {
-    openModal(`<pre>Ты справился, умничка. Теперь ты дома.
-Я уже апнула мт веста, так что давай играть днями!</pre>`);
+    openModal(`<pre>Ты справился, умничка. Теперь ты дома, так что давай играть днями!</pre>`);
     state.secretFound = true;
     saveState();
   });

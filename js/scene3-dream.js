@@ -9,7 +9,7 @@
   const WALK_SPEED = 0.06; // прогресс вагона в секунду
 
   let spawnTimer = null;
-  let spawnInterval = 650;
+  let spawnInterval = 420;
   let textCount = 0;
   let running = false;
 
@@ -166,7 +166,7 @@
       anchorEls().forEach(a => a.classList.remove('picked'));
 
       textCount = 0;
-      spawnInterval = 650;
+      spawnInterval = 420;
       running = true;
       walking = false;
       progress = 0;

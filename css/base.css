@@ -69,6 +69,40 @@ img, canvas {
 
 .hidden { display: none !important; }
 
+#game-root {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* ползунки перемещения при зуме */
+#pan-controls {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  pointer-events: none;
+}
+#pan-controls[hidden] { display: none; }
+#pan-controls input {
+  pointer-events: auto;
+  position: fixed;
+  accent-color: #a8d820;
+  height: 18px;
+}
+#pan-x {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  width: min(420px, 60vw);
+}
+#pan-y {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  width: min(340px, 50vh);
+}
+
 input, button {
   font-family: inherit;
   font-size: inherit;

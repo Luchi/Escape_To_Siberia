@@ -92,6 +92,16 @@ function clickSlot(i) {
 function useItem(item) {
   if (!item) return;
 
+  // надетые вещи не снимаем — иначе замёрзнет
+  if (item.id === 'coat' && state.flags.coatOn) {
+    showText('Ватник уже надет. Снимать не надо — замерзнешь.');
+    return;
+  }
+  if (item.id === 'hat' && state.flags.hatOn) {
+    showText('Ушанка уже надета. Снимать не надо — замерзнешь.');
+    return;
+  }
+
   const mod = sceneModules[state.scene];
   if (mod && typeof mod.onUse === 'function' && mod.onUse(item) === true) return;
 
@@ -143,6 +153,10 @@ function examineSelected() {
   const item = state.inventory[state.selectedSlot - 1];
   if (!item) { showText('Слот пуст. Выбери предмет цифрами 1–6.'); return; }
   examineItem(item);
+  // после осмотра фокус снимается
+  state.selectedSlot = 0;
+  saveState();
+  renderInventory();
 }
 
 // ── Подсказка при наведении ──────────────────
@@ -206,6 +220,12 @@ document.addEventListener('keydown', e => {
   const radioOpen = modalOpen && modal.dataset && modal.dataset.mode === 'radio';
   if (modalOpen && !radioOpen) return;
 
+  // пока открыто радио, любые действия кроме вставки батарейки игнорируем
+  if (radioOpen) {
+    const sel = state.inventory[state.selectedSlot - 1];
+    if (!(e.code === 'KeyW' && sel && sel.id === 'battery')) return;
+  }
+
   // e.code — чтобы работало и на русской раскладке
   if (e.code === 'KeyW') useSelected();
   if (e.code === 'KeyE') examineSelected();
@@ -216,6 +236,11 @@ document.addEventListener('keydown', e => {
 document.querySelectorAll('#skills [data-skill]').forEach(btn => {
   btn.addEventListener('click', () => {
     const k = btn.dataset.skill;
+    const modal = document.getElementById('modal');
+    if (modal && modal.hidden === false && modal.dataset.mode === 'radio') {
+      const sel = state.inventory[state.selectedSlot - 1];
+      if (!(k === 'W' && sel && sel.id === 'battery')) return;
+    }
     if (k === 'W') return useSelected();
     if (k === 'E') return examineSelected();
     if (k === 'Q') { const m = sceneModules[state.scene]; if (m && m.onQ) m.onQ(); return; }

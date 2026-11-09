@@ -94,7 +94,7 @@
   // ── платформа ────────────────────────────────
   function platformScene() {
     showChoice(
-      ['assets/img/bg-platform.png', 'assets/img/bg-station.png'],
+      'assets/img/bg-platform.png',
       'Платформа «Повестка-Экспресс».\nБлин, указатели совсем размыло — ничего не понятно. Куда же идти?',
       [
         { label: 'НАЛЕВО', cb: () => showEnding('army') },
