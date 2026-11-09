@@ -92,16 +92,10 @@
 #scene-dream {
   user-select: none;
   -webkit-user-select: none;
-  background: #050505;
-  overflow: hidden;
-}
-#dream-world {
-  position: absolute;
-  inset: 0;
-  background: url('../assets/img/bg-train.png') center / cover no-repeat;
-  transform: scale(var(--zoom, 1));
-  transform-origin: 50% 55%;
-  will-change: transform;
+  background:
+    url('../assets/img/bg-train.png') center /
+      calc(100% * var(--zoom, 1)) calc(100% * var(--zoom, 1)) no-repeat,
+    #050505;
   overflow: hidden;
 }
 body.dream-walking #scene-dream {
