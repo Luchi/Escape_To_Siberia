@@ -858,10 +858,10 @@ body.flashing .scene.active {
 /* отступ у кнопки открытия сейфа */
 #safe-open { margin-left: 24px; }
 #safe-code {
-  width: 170px;
-  font-size: 26px;
+  width: 230px;
+  font-size: 18px;
   padding: 8px 10px;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
 }
 
 /* Сцена 3 — фигура Лучи в конце коридора */

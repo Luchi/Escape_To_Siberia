@@ -22,7 +22,8 @@ function addItem(id) {
     return false;
   }
   state.inventory.push({ id, ...ITEM_DEFS[id] });
-  state.selectedSlot = state.inventory.length;
+  // подобранный предмет не выбирается автоматически
+  state.selectedSlot = 0;
   saveState();
   renderInventory();
   return true;
