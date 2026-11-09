@@ -3,12 +3,12 @@
 (function () {
   const CRITICAL = [
     'icon_load.png','hud.png','Vlad-AV.png',
-    'bg-commissariat.png','bg-commissariat-wthoutPhoto.png',
     'wall1.png','wall2.png','wall3.png','wall4.png','wall5.png',
     'Q.png','W.png','E.png','icon_R.png','Note.png'
   ];
 
   const REST = [
+    'bg-commissariat.png','bg-commissariat-wthoutPhoto.png',
     'bg-station.png','bg-train.png','bg-map.png','bg-platform.png','bg-road.png',
     'bg-forest.png','bg-taiga.png','bg-final.png',
     'mirror-eye.png','Photo.png','radio.png','radio_for.png',
@@ -77,6 +77,6 @@
       if (fill) fill.style.width = Math.round(ratio * 100) + '%';
     }, true).then(finish);
 
-    setTimeout(finish, 6000);
+    setTimeout(finish, 2500);
   });
 })();
