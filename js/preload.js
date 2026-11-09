@@ -68,7 +68,7 @@
           else complete();
         };
         img.onerror = complete;
-        img.src = 'assets/img/' + name + (name === 'radio.png' ? '?v=2' : name === 'calendar-november.png' ? '?v=4' : '');
+        img.src = 'assets/img/' + name + (name === 'radio.png' ? '?v=2' : name === 'calendar-november.png' ? '?v=5' : '');
       });
     });
   }
