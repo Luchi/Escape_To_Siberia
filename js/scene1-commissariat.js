@@ -306,7 +306,7 @@ Discord. Я написала первой.</pre>`;
           state.flags.calendarStep = 1;
           saveState();
           showViewer(
-            'assets/img/calendar-november.png?v=2',
+            'assets/img/calendar-november.png?v=3',
             '10 ноября обведено котиком. За календарём, между страницами, что-то есть...',
             'Календарь, ноябрь',
             '10 ноября обведено котиком. Между страницами что-то есть...'
