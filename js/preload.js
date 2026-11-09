@@ -1,19 +1,22 @@
-// Быстрая загрузка: сначала только критичные картинки,
-// остальное догружается в фоне, не задерживая старт.
+// Загрузка: все картинки первой сцены — до старта,
+// остальное догружается, пока игрок проходит сцену 1.
 (function () {
+  // всё, что нужно для сцены 0 и сцены 1 — грузим до старта
   const CRITICAL = [
     'icon_load.png','hud.png','Vlad-AV.png',
+    'bg-commissariat.png','bg-commissariat-wthoutPhoto.png',
     'wall1.png','wall2.png','wall3.png','wall4.png','wall5.png',
-    'Q.png','W.png','E.png','icon_R.png','Note.png'
+    'Q.png','W.png','E.png','icon_R.png','Note.png',
+    'mirror-eye.png','Photo.png','radio.png',
+    'calendar-november.png','calendar-february.png',
+    'icon-battery.png','icon-coat.png','hat.png','shawarma.png','icon-dino.png'
   ];
 
+  // остальное догружается, пока игрок в первой сцене
   const REST = [
-    'bg-commissariat.png','bg-commissariat-wthoutPhoto.png',
     'bg-station.png','bg-train.png','bg-map.png','bg-platform.png','bg-road.png',
     'bg-forest.png','bg-taiga.png','bg-final.png',
-    'mirror-eye.png','Photo.png','radio.png','radio_for.png',
-    'calendar-november.png','calendar-february.png',
-    'icon-battery.png','icon-coat.png','hat.png','shawarma.png','icon-dino.png',
+    'radio_for.png',
     'icon-catlight.png','luchi_model.png','eye_dream.png','manga.png','paws_t.png',
     'ending-taiga.png','Ending_Arm.png','defeat.png','Secret_End.png','Luchi_End.png',
     'End_Scene1.png','end_light.gif','favicon.png','icon_sait.png'
@@ -77,6 +80,6 @@
       if (fill) fill.style.width = Math.round(ratio * 100) + '%';
     }, true).then(finish);
 
-    setTimeout(finish, 2500);
+    setTimeout(finish, 20000);
   });
 })();
