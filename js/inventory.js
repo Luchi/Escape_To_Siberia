@@ -5,7 +5,7 @@ const ITEM_DEFS = {
   shaurma:  { name: 'Шаурма «Тайга»', short: 'Шаурма', icon: '🌯', iconSrc: 'assets/img/shawarma.png', desc: 'Восстанавливает веру в людей.' },
   dino:     { name: 'Дейнозух-брелок', short: 'Брелок', icon: '🦖', iconSrc: 'assets/img/icon-dino.png', desc: '' },
   photo:    { name: 'Фотография Сони', short: 'Фото', icon: '🖼️', iconSrc: 'assets/img/Photo.png', desc: 'Гештальт Соня Luchi. Оператор. Частота не указана. Но ты её знаешь.' },
-  catLight: { name: 'Кот-фонарик Ева-Фунтик', short: 'Кот', icon: '🐈', iconSrc: 'assets/img/icon-catlight.png', desc: 'Внутри что-то особенное. Тёплое.' }
+  catLight: { name: 'Кот-фонарик Ева-Фунтик', short: 'Кот', icon: '🐈', iconSrc: 'assets/img/icon-catlight.png', desc: 'Внутри что-то особенное. Тёплое.\nНа ошейнике выцарапано: «Я тебя люблю».' }
 };
 
 const INVENTORY_SIZE = 6;
