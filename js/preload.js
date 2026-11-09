@@ -1,17 +1,23 @@
-// Предзагрузка всех картинок + экран загрузки
+// Предзагрузка всех используемых картинок + экран загрузки
 (function () {
   const FILES = [
-    'bg-commissariat-wthoutPhoto.png','bg-commissariat.png','bg-final.png','bg-forest.png',
-    'bg-map.png','bg-platform.png','bg-road.png','bg-station.png','bg-taiga.png','bg-train.png',
-    'calendar-february.png','calendar-november.png','defeat.png','Defeat_Arm.png','E.png',
-    'ending-taiga.png','Ending_Arm.png','end_light.gif','end_light_last.png','eye_dream.png',
-    'eye_dream_t.png','February.png','hat.png','hud.png','icon-battery.png','icon-catlight.png',
-    'icon-coat.png','icon-dino.png','icon-draw.png','icon-R.png','icon_load.png','icon_R.png',
-    'icon_sait.png','Luchi_End.png','luchi_model.png','Luchi_Portret.png','manga.png',
-    'mirror-eye.png','Note.png','November.png','paws.png','paws_t.png','Photo.png','Q.png',
-    'radio.png','radio_for.png','ring.png','Secret_End.png','shawarma.png','Vlad-AV.png',
-    'W.png','wall-1.png','wall-2.png','wall-3.png','wall-4.png','wall1.png','wall2.png',
-    'wall3.png','wall4.png','wall5.png'
+    // фоны
+    'bg-commissariat.png','bg-commissariat-wthoutPhoto.png','bg-station.png','bg-train.png',
+    'bg-map.png','bg-platform.png','bg-road.png','bg-forest.png','bg-taiga.png','bg-final.png',
+    // HUD и интерфейс
+    'hud.png','Note.png','Q.png','W.png','E.png','icon_R.png','Vlad-AV.png','favicon.png',
+    // сцена 1
+    'mirror-eye.png','Photo.png','radio.png','radio_for.png','calendar-november.png',
+    'calendar-february.png','wall1.png','wall2.png','wall3.png','wall4.png','wall5.png',
+    // предметы
+    'icon-battery.png','icon-coat.png','hat.png','shawarma.png','icon-dino.png','icon-catlight.png',
+    // сон
+    'luchi_model.png','eye_dream.png','manga.png','paws_t.png',
+    // концовки
+    'ending-taiga.png','Ending_Arm.png','defeat.png','Secret_End.png','Luchi_End.png',
+    'end_light.gif',
+    // загрузка
+    'icon_load.png','icon_sait.png'
   ];
 
   const fill = document.getElementById('loader-fill');
@@ -31,7 +37,7 @@
     setTimeout(() => {
       if (loader) loader.classList.add('done');
       setTimeout(() => { if (loader) loader.hidden = true; }, 600);
-    }, 250);
+    }, 200);
   }
 
   window.assetsReady = new Promise(resolve => {
@@ -39,17 +45,26 @@
 
     FILES.forEach(name => {
       const img = new Image();
-      const finish = () => {
+      let settled = false;
+
+      const complete = () => {
+        if (settled) return;
+        settled = true;
         loaded++;
         update();
         left--;
         if (left <= 0) { done(); resolve(); }
       };
-      img.onload = finish;
-      img.onerror = finish;
+
+      img.onload = () => {
+        // декодируем сразу, чтобы при смене сцены не было пустого кадра
+        if (img.decode) img.decode().then(complete, complete);
+        else complete();
+      };
+      img.onerror = complete;
       img.src = 'assets/img/' + name;
     });
 
-    setTimeout(() => { done(); resolve(); }, 12000);
+    setTimeout(() => { done(); resolve(); }, 20000);
   });
 })();

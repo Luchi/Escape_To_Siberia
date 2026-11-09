@@ -291,15 +291,12 @@
             const light = document.getElementById('end-light-wrap');
             const gif = document.getElementById('end-light');
             if (light) light.hidden = false;
-            if (gif) {
-              gif.src = 'assets/img/end_light.gif';
-              // гифка проигрывается один раз, дальше висит последний кадр
-              setTimeout(() => { gif.src = 'assets/img/end_light_last.png'; }, 1320);
-            }
+            if (gif) gif.src = 'assets/img/end_light.gif';
+            // гифка проигрывается ровно один раз — и сразу финал
             setTimeout(() => {
               if (light) light.hidden = true;
               showEnding('canon');
-            }, 2400);
+            }, 1300);
           };
         }
       }
