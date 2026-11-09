@@ -858,13 +858,13 @@ body.flashing .scene.active {
 /* отступ у кнопки открытия сейфа */
 #safe-open { margin-left: 24px; }
 #safe-code {
-  width: 240px;
-  font-size: 18px;
+  width: 340px;
+  font-size: 16px;
   padding: 8px 10px;
   letter-spacing: 2px;
 }
 #safe-code::placeholder {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 1px;
 }
 

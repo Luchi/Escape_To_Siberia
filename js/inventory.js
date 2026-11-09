@@ -122,6 +122,11 @@ function useItem(item) {
 
 function examineItem(item) {
   if (!item) return;
+  // осмотр снимает выбор со слота
+  state.selectedSlot = 0;
+  saveState();
+  renderInventory();
+
   const def = ITEM_DEFS[item.id] || {};
   const src = def.iconSrc || item.iconSrc;
   const caption = `${item.name}\n\n${item.desc || ''}`.trim();
@@ -208,9 +213,12 @@ function ensureSelection() {
 document.addEventListener('keydown', e => {
   if (isTyping(e)) return;
 
+  const hudHidden = document.getElementById('hud') && document.getElementById('hud').hidden;
+
   // цифры работают в любой раскладке (e.code не зависит от языка)
   const digit = /^Digit([1-6])$/.exec(e.code || '');
   if (digit) {
+    if (hudHidden) return;
     clickSlot(Number(digit[1]) - 1);
     return;
   }
@@ -226,6 +234,8 @@ document.addEventListener('keydown', e => {
     if (!(e.code === 'KeyW' && sel && sel.id === 'battery')) return;
   }
 
+  if (hudHidden) return;
+
   // e.code — чтобы работало и на русской раскладке
   if (e.code === 'KeyW') useSelected();
   if (e.code === 'KeyE') examineSelected();
@@ -235,6 +245,7 @@ document.addEventListener('keydown', e => {
 
 document.querySelectorAll('#skills [data-skill]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (document.getElementById('hud').hidden) return;
     const k = btn.dataset.skill;
     const modal = document.getElementById('modal');
     if (modal && modal.hidden === false && modal.dataset.mode === 'radio') {
