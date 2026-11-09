@@ -1,55 +1,52 @@
-// Загрузка: всё для сцен 0–1 — до старта.
-// Остальное грузится фоном по порядку: сцена 2 → сон → карта → платформа →
-// трасса → лес → тайга → концовки → финал.
+// Загрузка: критичный минимум — до старта, остальное — фоном.
+// Экран загрузки держится, пока сцена 0 не начнёт печатать текст.
 (function () {
+  // минимум для запуска и первой сцены
   const CRITICAL = [
-    'icon_load.png','hud.png','Vlad-AV.png',
-    'bg-commissariat.png','bg-commissariat-wthoutPhoto.png',
+    'icon_load.png','hud.png',
+    'bg-commissariat.png',
     'wall1.png','wall2.png','wall3.png','wall4.png','wall5.png',
-    'Q.png','W.png','E.png','icon_R.png','Note.png',
-    'mirror-eye.png','Photo.png','radio.png',
+    'Q.png','W.png','E.png','icon_R.png','Note.png'
+  ];
+
+  // предметы и картинки сцены 1 — грузятся сразу после старта
+  const SCENE1 = [
+    'Vlad-AV.png','bg-commissariat-wthoutPhoto.png','mirror-eye.png','Photo.png','radio.png',
     'calendar-november.png','calendar-february.png',
     'icon-battery.png','icon-coat.png','hat.png','shawarma.png','icon-dino.png'
   ];
 
   const REST_GROUPS = [
-    // сцена 2
-    ['bg-station.png'],
-    // сон
-    ['bg-train.png','luchi_model.png','eye_dream.png','manga.png','paws_t.png','icon-catlight.png'],
-    // карта
-    ['bg-map.png'],
-    // платформа
-    ['bg-platform.png'],
-    // трасса
-    ['bg-road.png'],
-    // лес
-    ['bg-forest.png'],
-    // тайга
-    ['bg-taiga.png','radio_for.png'],
-    // концовки
+    SCENE1,
+    ['bg-station.png'],                                                   // сцена 2
+    ['bg-train.png','luchi_model.png','eye_dream.png','manga.png',
+     'paws_t.png','icon-catlight.png'],                                   // сон
+    ['bg-map.png'],                                                       // карта
+    ['bg-platform.png'],                                                  // платформа
+    ['bg-road.png'],                                                      // трасса
+    ['bg-forest.png'],                                                    // лес
+    ['bg-taiga.png','radio_for.png'],                                     // тайга
     ['ending-taiga.png','Ending_Arm.png','defeat.png','Secret_End.png',
-     'Luchi_End.png','End_Scene1.png','end_light.gif'],
-    // финал и мелочи
-    ['bg-final.png','favicon.png','icon_sait.png']
+     'Luchi_End.png','End_Scene1.png','end_light.gif'],                   // концовки
+    ['bg-final.png','favicon.png','icon_sait.png']                        // финал
   ];
 
   const fill = document.getElementById('loader-fill');
   const loader = document.getElementById('loader');
 
-  let finished = false;
+  let hidden = false;
 
-  function doneUI() {
-    if (finished) return;
-    finished = true;
+  window.hideLoader = function () {
+    if (hidden) return;
+    hidden = true;
     if (fill) fill.style.width = '100%';
-    setTimeout(() => {
-      if (loader) loader.classList.add('done');
-      setTimeout(() => { if (loader) loader.hidden = true; }, 500);
-    }, 120);
-  }
+    if (loader) {
+      loader.classList.add('done');
+      setTimeout(() => { loader.hidden = true; }, 600);
+    }
+  };
 
-  function loadList(names, onProgress, priority) {
+  function loadList(names, onProgress, decode) {
     return new Promise(resolve => {
       let left = names.length;
       let loaded = 0;
@@ -57,7 +54,6 @@
 
       names.forEach(name => {
         const img = new Image();
-        if (priority && 'fetchPriority' in img) img.fetchPriority = 'high';
         let settled = false;
         const complete = () => {
           if (settled) return;
@@ -68,7 +64,7 @@
           if (left <= 0) resolve();
         };
         img.onload = () => {
-          if (img.decode) img.decode().then(complete, complete);
+          if (decode && img.decode) img.decode().then(complete, complete);
           else complete();
         };
         img.onerror = complete;
@@ -91,16 +87,16 @@
     const finish = () => {
       if (resolved) return;
       resolved = true;
-      doneUI();
+      if (fill) fill.style.width = '100%';
       resolve();
-      // всё остальное — уже во время сцен 0–1
-      setTimeout(loadRest, 200);
+      setTimeout(loadRest, 300);
     };
 
     loadList(CRITICAL, ratio => {
       if (fill) fill.style.width = Math.round(ratio * 100) + '%';
     }, true).then(finish);
 
-    setTimeout(finish, 20000);
+    // страховка: не держим экран вечно, только если что-то совсем застряло
+    setTimeout(finish, 30000);
   });
 })();

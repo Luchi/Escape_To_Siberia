@@ -38,6 +38,8 @@
       fontsReady().then(() => {
         if (token !== bootToken || state.scene !== 'scene-boot') return;
         text.textContent = '';
+        // прячем загрузочный экран только когда начинаем печатать
+        if (window.hideLoader) window.hideLoader();
         typeLines(text, bootLines, 0, () => {
           if (token !== bootToken) return;
           document.getElementById('boot-input-wrap').hidden = false;
