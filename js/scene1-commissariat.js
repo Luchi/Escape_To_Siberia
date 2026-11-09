@@ -174,7 +174,7 @@ Discord. Я написала первой.</pre>`;
     `;
     openModal(html);
     const win = document.querySelector('#modal .modal-window');
-    if (win) win.style.minWidth = '560px';
+    if (win) win.style.minWidth = '420px';
     document.getElementById('safe-open').addEventListener('click', () => {
       const v = document.getElementById('safe-code').value;
       if (v === SAFE_CODE) {
