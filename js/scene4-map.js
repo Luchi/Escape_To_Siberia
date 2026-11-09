@@ -119,11 +119,13 @@
   let forestStage = 0;
   let forestOpen = false;
   let forestPaws = false;
+  let forestCorrect = [];
 
   function forestScene() {
     forestStage = 0;
     forestPaws = false;
     forestOpen = true;
+    forestCorrect = [0, 1, 2].map(() => Math.floor(Math.random() * 3));
     renderForest();
   }
 
@@ -131,7 +133,7 @@
     forestOpen = true;
     const text = `ЛЕС — ${forestStage + 1}/3\nТри тропы. Куда идёшь?`;
     const labels = ['ЛЕВАЯ ТРОПА', 'СРЕДНЯЯ ТРОПА', 'ПРАВАЯ ТРОПА'];
-    const correct = [0, 1, 2][forestStage];
+    const correct = forestCorrect[forestStage] || 0;
 
     showChoice(
       'assets/img/bg-forest.png',
@@ -150,7 +152,7 @@
   }
 
   function forestPick(i) {
-    const correct = [0, 1, 2][forestStage];
+    const correct = forestCorrect[forestStage] || 0;
     if (i !== correct) {
       hideChoice();
       showEnding('taiga');

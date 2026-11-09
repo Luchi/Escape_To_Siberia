@@ -167,10 +167,14 @@ Discord. Я написала первой.</pre>`;
     const html = `
       <h3>СЕЙФ</h3>
       <p>Четыре цифры:</p>
-      <input id="safe-code" maxlength="4" placeholder="0000" style="width:120px">
-      <button id="safe-open">ОТКРЫТЬ</button>
+      <div class="safe-row">
+        <input id="safe-code" maxlength="4" placeholder="0000">
+        <button id="safe-open">ОТКРЫТЬ</button>
+      </div>
     `;
     openModal(html);
+    const win = document.querySelector('#modal .modal-window');
+    if (win) win.style.minWidth = '560px';
     document.getElementById('safe-open').addEventListener('click', () => {
       const v = document.getElementById('safe-code').value;
       if (v === SAFE_CODE) {

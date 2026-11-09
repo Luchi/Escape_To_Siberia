@@ -857,16 +857,25 @@ body.flashing .scene.active {
 
 /* отступ у кнопки открытия сейфа */
 #safe-open { margin-left: 24px; }
+.safe-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
+}
 #safe-code {
-  width: 340px;
-  font-size: 16px;
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  font-size: 24px;
   padding: 8px 10px;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
 }
 #safe-code::placeholder {
-  font-size: 13px;
+  font-size: 16px;
   letter-spacing: 1px;
 }
+#safe-open { margin-left: 0; }
 
 /* Сцена 3 — фигура Лучи в конце коридора */
 #dream-luchi {

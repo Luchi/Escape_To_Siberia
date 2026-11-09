@@ -59,6 +59,8 @@ function openModal(html, onClose) {
 function closeModal() {
   const m = document.getElementById('modal');
   m.hidden = true;
+  const win = document.querySelector('#modal .modal-window');
+  if (win) win.style.minWidth = '';
   if (m._onClose) { const cb = m._onClose; m._onClose = null; cb(); }
 }
 
