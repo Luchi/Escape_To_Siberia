@@ -27,20 +27,30 @@
     const step = state.flags.mapStep || 0;
     document.querySelectorAll('.map-point').forEach(p => {
       const need = ORDER[p.dataset.point];
-      p.classList.toggle('locked', need === undefined || need > step);
+      const isForestReturn = p.dataset.point === 'forest' && step >= 3;
+      const locked = need === undefined || (need !== step && !isForestReturn);
+      p.classList.toggle('locked', locked);
       p.classList.toggle('current', need === step);
     });
   }
 
   function handlePoint(point) {
+    const step = state.flags.mapStep || 0;
     if (point === 'platform') {
-      if ((state.flags.mapStep || 0) >= 0) return platformScene();
+      if (step === 0) platformScene();
       return;
     }
-    if ((state.flags.mapStep || 0) < ORDER[point]) return;
-    if (point === 'road') return roadScene();
-    if (point === 'forest') return forestScene();
-    if (point === 'taiga') return openTaigaScene();
+    if (point === 'road') {
+      if (step === 1) roadScene();
+      return;
+    }
+    if (point === 'forest') {
+      if (step === 2 || step >= 3) forestScene();
+      return;
+    }
+    if (point === 'taiga') {
+      if (step >= 3) openTaigaScene();
+    }
   }
 
   function advance(step) {
@@ -147,7 +157,9 @@
     forestStage += 1;
     if (forestStage >= 3) {
       hideChoice();
-      advance(3);
+      state.flags.mapStep = 3;
+      saveState();
+      openTaigaScene();
       return;
     }
     renderForest();
@@ -160,6 +172,13 @@
     if (window.ambientWind) window.ambientWind(true);
     const radio = document.getElementById('taiga-radio');
     if (radio) radio.onclick = openTaigaRadio;
+    const forestBtn = document.getElementById('taiga-forest');
+    if (forestBtn) {
+      forestBtn.onclick = () => {
+        hideTaigaScene();
+        forestScene();
+      };
+    }
   }
 
   function hideTaigaScene() {
@@ -296,7 +315,7 @@
             setTimeout(() => {
               if (light) light.hidden = true;
               showEnding('canon');
-            }, 1300);
+            }, 1200);
           };
         }
       }

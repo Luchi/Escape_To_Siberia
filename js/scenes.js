@@ -68,6 +68,8 @@ function showViewer(src, fallback = '', alt = '', caption = '') {
   const cap = document.getElementById('viewer-caption');
   if (!v || !img) { if (fallback) showText(fallback); return; }
   img.alt = alt;
+  img.style.maxHeight = '';
+  img.style.maxWidth = '';
   img.onerror = () => {
     v.hidden = true;
     if (fallback) showText(fallback);

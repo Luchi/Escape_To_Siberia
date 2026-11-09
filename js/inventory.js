@@ -115,7 +115,12 @@ function examineItem(item) {
   const src = def.iconSrc || item.iconSrc;
   const caption = `${item.name}\n\n${item.desc || ''}`.trim();
   if (src) {
-    showViewer(src, caption, item.name);
+    showViewer(src, '', item.name, caption);
+    const img = document.getElementById('viewer-img');
+    if (img && item.id !== 'photo') {
+      img.style.maxHeight = '42vh';
+      img.style.maxWidth = '42vw';
+    }
     return;
   }
   showText(`${item.name}\n\n${item.desc}`);
