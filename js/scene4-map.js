@@ -201,7 +201,6 @@
       <p>Что ты хотел бы ей сейчас сказать?</p>
       <div class="choice-buttons">
         <button id="taiga-come">ПОДОЙТИ</button>
-        <button id="taiga-close">ЗАКРЫТЬ</button>
       </div>
     `);
 
@@ -209,7 +208,6 @@
       closeModal();
       taigaTune();
     };
-    document.getElementById('taiga-close').onclick = () => closeModal();
   }
 
   function taigaTune() {
